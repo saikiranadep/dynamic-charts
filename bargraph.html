@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			$('#button1').click(function(e){
+				e.preventDefault();
+			 var data={};
+			$.ajax({
+								method: 'POST',
+								contentType: 'application/json',
+								url: "http://localhost:9000/process_get",
+								success: function(data) {
+									alert(data);
+									alert("WORKING");
+									 console.log(data);
+
+									 var player=[];
+									 var score=[];
+									 $.each(JSON.parse(data),function(key,value){
+										 alert('EACH LOOP');
+										 $.each(value,function(key1,value1){
+
+										 player.push(value1.player_name);
+										  score.push(value1.score);
+
+									 })
+									 })
+									  console.log(player);
+
+									 var ctx = document.getElementById('myChart').getContext('2d');
+									 		var myChart = new Chart(ctx, {
+									 				type: 'bar',
+									 				data: {
+									 			labels: player,
+									 			datasets: [{
+									 					label: '# SCORE',
+									 					data: score,
+									 					backgroundColor: [
+									 				'rgba(255, 99, 132, 0.2)',
+									 				'rgba(54, 162, 235, 0.2)',
+									 				'rgba(255, 206, 86, 0.2)',
+									 				'rgba(75, 192, 192, 0.2)',
+									 				'rgba(153, 102, 255, 0.2)',
+									 				'rgba(255, 159, 64, 0.2)'
+									 					],
+									 					borderColor: [
+									 				'rgba(255, 99, 132, 1)',
+									 				'rgba(54, 162, 235, 1)',
+									 				'rgba(255, 206, 86, 1)',
+									 				'rgba(75, 192, 192, 1)',
+									 				'rgba(153, 102, 255, 1)',
+									 				'rgba(255, 159, 64, 1)'
+									 					],
+									 					borderWidth: 1
+									 			}]
+									 				},
+									 				options: {
+									 										scales: {
+									 															yAxes:
+									 															[{
+									 																	ticks: {
+									 																					beginAtZero: true
+									 																				 }
+									 															}]
+									 														}
+									 								}
+									 });
+							},
+					error: function()
+					{
+						console.log('error');
+					}
+			});
+		});
+	});
+
+
+
+</script>
+</head>
+<body>
+
+  <form action = "/" method = "get">
+
+	</form>
+
+  <form action = "/process_get" method = "POST">
+			<canvas id="myChart"></canvas>
+		<button id="button1" name="but1">CHART</button>
+	</form>
+</body>
+</html>
