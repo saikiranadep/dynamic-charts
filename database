@@ -1,0 +1,8 @@
+create database Node_db
+
+CREATE TABLE `score` (
+  `playerid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `score` int(11) DEFAULT '0',
+  'player_name' varchar(255),
+  PRIMARY KEY (`playerid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
