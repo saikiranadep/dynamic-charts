@@ -6,3 +6,6 @@ CREATE TABLE `score` (
   'player_name' varchar(255),
   PRIMARY KEY (`playerid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+Insert Data in table
